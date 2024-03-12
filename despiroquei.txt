@@ -1,0 +1,133 @@
+save_wall:
+    movw $0x700, %bx
+    
+    call full_wall
+    call middle_full_wall
+    call populated_wall
+    call empty_wall
+    call populated_wall
+    call populated_wall
+    call empty_wall
+    call populated_wall
+    call middle_full_wall
+    call full_wall
+
+    inc %bx
+    movb $2, (%bx)
+
+    ret
+
+full_wall:
+    # 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 #
+    push %ax
+
+    movw $0, %ax
+    loop:
+        # Escreve 1 na posiçao de memoria %bx
+        movw $1, (%bx)
+
+        inc %ax
+
+        # Aumenta para a proxima posicao de memoria
+        inc %bx
+
+        #Para quando chegar em 0x160
+        #os primeiros 16 espaços da matrix 16x10 
+        cmp $16, %ax
+        jl loop
+
+    pop %ax
+
+    ret
+
+populated_wall_open:
+    # 0 0 1 1 0 1 0 1 1 0 1 0 1 1 0 0 #
+
+    add $2, %bx
+    movw $1, (%bx)
+    inc %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    inc %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    inc %bx
+    movw $1, (%bx)
+    add $2, %bx
+    inc %bx
+
+    ret
+
+populated_wall:
+    # 1 0 1 1 0 1 0 1 1 0 1 0 1 1 0 1 #
+
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    inc %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    inc %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    inc %bx
+    movw $1, (%bx)
+    add $2, %bx
+    movw $1, (%bx)
+    inc %bx
+
+    ret
+
+empty_wall:
+    # 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 #
+    push %ax
+
+    movw $1, (%bx)
+    inc %bx
+
+    movw $0, %ax
+    loop2:
+        # Escreve 1 na posiçao de memoria %bx
+        movw $0, (%bx)
+
+        inc %ax
+
+        # Aumenta para a proxima posicao de memoria
+        inc %bx
+
+        #Para quando chegar em 0x160
+        #os primeiros 16 espaços da matrix 16x10 
+        cmp $14, %ax
+        jl loop2
+
+    pop %ax
+
+    movw $1, (%bx)
+    inc %bx
+
+    ret
+
+middle_full_wall:
+    # 1 0 0 0 0 0 0 1 1 0 0 0 0 0 0 1 #
+    movw $1, (%bx)
+    add $7, %bx
+    movw $1, (%bx)
+    inc %bl
+    movw $1, (%bx)
+    add $7, %bx
+    movw $1, (%bx)
+    inc %bx
+
+    ret
