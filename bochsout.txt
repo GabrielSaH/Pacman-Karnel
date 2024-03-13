@@ -34,7 +34,7 @@
 00000000000i[IMG   ] Disk image modules
 00000000000i[IMG   ]   flat concat sparse dll growing undoable volatile vmware3
 00000000000i[IMG   ]   vmware4 vbox vpc vvfat
-00000000000i[MEM0  ] allocated memory at 0x7f81a33dd010. after alignment, vector=0x7f81a33de000, block_size = 128K
+00000000000i[MEM0  ] allocated memory at 0x7f6778ddd010. after alignment, vector=0x7f6778dde000, block_size = 128K
 00000000000i[MEM0  ] 32,00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=256
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/home/usr/bochs/share/bochs/BIOS-bochs-latest')
@@ -46,7 +46,7 @@
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] CMOS RTC using realtime synchronisation method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Wed Mar 13  0:51:01   2024 tz=utc (time0=1710291061)
+00000000000i[CMOS  ] Setting initial clock to: Wed Mar 13  0:57:30   2024 tz=utc (time0=1710291450)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -212,25 +212,25 @@
 00001503566i[BXVGA ] VBE known Display Interface b0c0
 00001503598i[BXVGA ] VBE known Display Interface b0c5
 00001505019i[VBIOS ] VBE Bios ID: vbe.c 2024-01-07
-03159812384i[BIOS  ] Booting from 0000:7c00
-03413916000p[XGUI  ] >>PANIC<< POWER button turned off.
-03413916000i[CPU0  ] CPU is in real mode (active)
-03413916000i[CPU0  ] CS.mode = 16 bit
-03413916000i[CPU0  ] SS.mode = 16 bit
-03413916000i[CPU0  ] EFER   = 0x00000000
-03413916000i[CPU0  ] | EAX=0000001e  EBX=00007d11  ECX=00090014  EDX=00000014
-03413916000i[CPU0  ] | ESP=0000ffbc  EBP=00000000  ESI=000e0000  EDI=0000ffac
-03413916000i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
-03413916000i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-03413916000i[CPU0  ] |  CS:f000( 0004| 0|  0) 000f0000 0000ffff 0 0
-03413916000i[CPU0  ] |  DS:0040( 0005| 0|  0) 00000400 0000ffff 0 0
-03413916000i[CPU0  ] |  SS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-03413916000i[CPU0  ] |  ES:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-03413916000i[CPU0  ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-03413916000i[CPU0  ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
-03413916000i[CPU0  ] | EIP=0000e86d (0000e86d)
-03413916000i[CPU0  ] | CR0=0x60000010 CR2=0x00000000
-03413916000i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
-03413916000i[CMOS  ] Last time: 1710291068 tz=utc (Wed Mar 13  0:51:08   2024)
-03413916000i[XGUI  ] Exit
-03413916000i[SIM   ] quit_sim called with exit code 1
+03538941364i[BIOS  ] Booting from 0000:7c00
+04242600000p[XGUI  ] >>PANIC<< POWER button turned off.
+04242600000i[CPU0  ] CPU is in real mode (active)
+04242600000i[CPU0  ] CS.mode = 16 bit
+04242600000i[CPU0  ] SS.mode = 16 bit
+04242600000i[CPU0  ] EFER   = 0x00000000
+04242600000i[CPU0  ] | EAX=0000001e  EBX=00007d11  ECX=00090014  EDX=00000014
+04242600000i[CPU0  ] | ESP=0000ffbc  EBP=00000000  ESI=000e0000  EDI=0000ffac
+04242600000i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
+04242600000i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+04242600000i[CPU0  ] |  CS:f000( 0004| 0|  0) 000f0000 0000ffff 0 0
+04242600000i[CPU0  ] |  DS:0040( 0005| 0|  0) 00000400 0000ffff 0 0
+04242600000i[CPU0  ] |  SS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+04242600000i[CPU0  ] |  ES:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+04242600000i[CPU0  ] |  FS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+04242600000i[CPU0  ] |  GS:0000( 0005| 0|  0) 00000000 0000ffff 0 0
+04242600000i[CPU0  ] | EIP=0000e86d (0000e86d)
+04242600000i[CPU0  ] | CR0=0x60000010 CR2=0x00000000
+04242600000i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
+04242600000i[CMOS  ] Last time: 1710291464 tz=utc (Wed Mar 13  0:57:44   2024)
+04242600000i[XGUI  ] Exit
+04242600000i[SIM   ] quit_sim called with exit code 1
