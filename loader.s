@@ -7,14 +7,6 @@
 # generate 16-bit code
 .code16 			   
 
-    
-
-#array:
-#    .ascii "1234"
-    
-#mensagem:
- #   .ascii "o valor do array eh = \0"
-
 
 # executable code location
 .text 				   

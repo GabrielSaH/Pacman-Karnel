@@ -1,7 +1,4 @@
 .code16 			   
-
-
-
 .text 				   
 .globl _start
 
@@ -17,9 +14,8 @@ pacman:
     
     call draw_matrix
 
-    call move_cube
+    call draw_pacman
 
-    
     movw $0x7d00, %bx
     add $0x11, %bx
 
@@ -66,7 +62,7 @@ move_up:
     
     sub $20, %dx
 
-    call move_cube
+    call draw_pacman
     
     # Checa buffer
     movb $1, %ah
@@ -96,7 +92,7 @@ move_down:
 
     add $20, %dx
 
-    call move_cube
+    call draw_pacman
     
     # Checa buffer
     movb $1, %ah
@@ -130,7 +126,7 @@ move_right:
 
     add $20, %cx
     
-    call move_cube
+    call draw_pacman
 
     # Checa buffer
     movb $1, %ah
@@ -167,7 +163,7 @@ move_left:
     
     sub $20, %cx
     
-    call move_cube
+    call draw_pacman
 
     # Checa buffer
     movb $1, %ah
@@ -194,7 +190,7 @@ draw_cube:
     draw:
         int $0x10
 
-    cmp $20, %bh
+    cmp $10, %bh
     jl increment_x
     je increment_y
 
@@ -206,14 +202,14 @@ draw_cube:
 
     increment_y:
         # reseta o X e seu contador
-        sub $20, %cx
-        sub $20, %bh
+        sub $10, %cx
+        sub $10, %bh
 
         # incrementa o Y e seu contador
         inc %dx
         inc %bl
     
-    cmp $20, %bl
+    cmp $10, %bl
     jl draw
 
     popa
@@ -263,25 +259,16 @@ teleport_left:
     call reset_screen
     movw $20, %cx
     add $15, %bx
-    call move_cube
+    call draw_pacman
     jmp move_right
 
 teleport_right:
     call reset_screen
     movw $300, %cx
     sub $15, %bx
-    call move_cube
+    call draw_pacman
     jmp move_left
 
-move_cube:
-    # function to write pixels
-    movb $0x0c, %ah
-    
-    # Desenha o cubo
-    movb $0xe, %al
-    call draw_cube
-    
-    ret
 
 sleep:
     push %cx
@@ -297,7 +284,6 @@ sleep:
     pop %cx
 
     ret
-
 
 draw_matrix:
     # Guarda o valor de registradores importantes para o progama
@@ -342,7 +328,7 @@ draw_wall:
     sub $0x7d00, %ax
 
     xor %dx, %dx
-    movb $16, %cl
+    movb $32, %cl
     
 
     # jmp pausa
@@ -360,8 +346,8 @@ draw_wall:
     # multiplica %ax por 10 e guarda o resultado em %cx
     # Como cada cubo tem 10 pixels de largura, isso define a posiçao do cubo
     # Ex: posiçao da matrix 3 começa em x = 60 e termina em x = 80
-    imul $20, %cx
-    imul $20, %dx
+    imul $10, %cx
+    imul $10, %dx
 
 
     
@@ -375,10 +361,81 @@ draw_wall:
 
     jmp return_draw_wall
 
+draw_pacman:
+    pusha
+    # cx = posicao x do cubo
+    # dx = posicao y do cubo
+    # bh = contador X
+    # bl = contador y 
+    movw $0, %bx
+
+    # function to write pixels
+    movb $0x0c, %ah
+    
+    # cor do pacman
+    movb $0xe, %al
+
+    draw_pacman_start:
+        cmp $1, %bh
+        jl compara_y_0
+        je compara_y_1
+    
+        cmp $9, %bh
+        jg compara_y_0
+        je compara_y_1
+
+        desenha_pacman:
+
+            int $0x10
+                    
+            incrementa_pacman:
+                cmp $10, %bh
+                je incrementa_pacman_y
+                
+                incrementa_pacman_x:
+                    inc %bh
+                    inc %cx
+                    jmp draw_pacman_start
+
+                incrementa_pacman_y:
+                    cmp $10, %bl
+                    je draw_pacman_end
+
+                    movb $0, %bh
+                    sub $10, %cx
+                    inc %bl
+                    inc %dx
+
+    compara_y_0:
+        cmp $2, %bl
+        jl incrementa_pacman
+
+        cmp $8, %bl
+        jg incrementa_pacman
+
+        jmp desenha_pacman
+
+    compara_y_1:
+        cmp $0, %bl
+        je incrementa_pacman
+
+        cmp $10, %bl
+        je incrementa_pacman
+        
+        jmp desenha_pacman
+    
+    draw_pacman_end:
+        sub $2, %cx
+        sub $7, %dx
+        movb $0, %al
+        int $0x10
+
+        popa
+        ret
+
 pausa:
     hlt
     jmp pausa
-
 
 
 
